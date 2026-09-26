@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Un portrait du loup, animal social et grand marcheur des forêts.">
+	<title>Loup — La voix de la forêt</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+		:root {
+			--forest: #172629;
+			--forest-soft: #2d4745;
+			--mist: #e9efeb;
+			--paper: #fbfcf8;
+			--lichen: #a9c09e;
+			--rust: #bf745d;
+			--ink: #263231;
+			--muted: #6e7976;
+			--line: rgba(38, 50, 49, .15);
+			--shadow: 0 24px 60px rgba(20, 42, 40, .18);
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: radial-gradient(circle at 88% 8%, rgba(169, 192, 158, .35), transparent 22rem), linear-gradient(135deg, var(--mist), #f7f8f2 50%, #e6ece8);
+			font-family: 'DM Sans', sans-serif;
+			line-height: 1.5;
+		}
+
+		.page { width: min(1170px, calc(100% - 48px)); margin: 0 auto; }
+		header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; }
+		.brand { display: flex; align-items: center; gap: 12px; color: var(--forest); font-size: 13px; font-weight: 700; letter-spacing: .14em; }
+		.brand-mark { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 13px 13px 13px 4px; color: var(--forest); background: var(--lichen); font-size: 20px; transform: rotate(-7deg); }
+		.edition { margin: 0; color: var(--muted); font-size: 12px; }
+
+		.hero { display: grid; grid-template-columns: .94fr 1.06fr; min-height: 600px; overflow: hidden; border-radius: 27px; background: var(--forest); box-shadow: var(--shadow); }
+		.hero-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(38px, 7vw, 88px); color: var(--mist); }
+		.eyebrow { margin: 0; color: var(--lichen); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+		h1, h2, h3 { font-family: 'Playfair Display', serif; }
+		h1 { max-width: 500px; margin: 20px 0 25px; font-size: clamp(57px, 7.2vw, 95px); line-height: .93; letter-spacing: -.06em; }
+		.hero-copy > p:not(.eyebrow) { max-width: 410px; margin: 0; color: #cad7d2; font-size: 17px; }
+		.hero-line { display: flex; align-items: center; gap: 12px; margin-top: 40px; color: #9db1ac; font-size: 12px; }
+		.hero-line::before { width: 31px; height: 1px; content: ''; background: var(--rust); }
+		.hero-photo { position: relative; min-height: 380px; background: #586966; }
+		.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+		.hero-photo::after { position: absolute; inset: 0; content: ''; background: linear-gradient(90deg, rgba(23,38,41,.34), transparent 44%), linear-gradient(0deg, rgba(19,32,34,.4), transparent 38%); }
+		.photo-label { position: absolute; z-index: 1; right: 24px; bottom: 20px; color: #fff; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+		.intro { display: grid; grid-template-columns: .82fr 1.18fr; gap: 80px; align-items: start; padding: 88px 0 76px; }
+		h2 { margin: 0; color: var(--forest); font-size: clamp(40px, 5vw, 63px); line-height: .97; letter-spacing: -.045em; }
+		.intro-copy { max-width: 610px; color: var(--muted); font-size: 18px; }
+		.intro-copy p { margin: 0 0 20px; }
+		.quote { margin: 29px 0 0; padding: 19px 0 0 22px; border-left: 3px solid var(--rust); color: var(--ink); font-family: 'Playfair Display', serif; font-size: 25px; line-height: 1.2; }
+
+		.section-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 22px; }
+		.section-heading h2 { font-size: 39px; }
+		.section-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+		.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 76px; }
+		.fact { min-height: 195px; padding: 28px; border: 1px solid var(--line); border-radius: 15px; background: rgba(251,252,248,.72); transition: transform .22s ease, box-shadow .22s ease; }
+		.fact:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(20,42,40,.1); }
+		.fact-number { color: var(--rust); font-family: 'Playfair Display', serif; font-size: 36px; }
+		.fact h3 { margin: 17px 0 7px; font-family: 'DM Sans', sans-serif; font-size: 16px; }
+		.fact p { margin: 0; color: var(--muted); font-size: 14px; }
+
+		.explorer { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 76px; }
+		.panel { padding: 34px; border-radius: 18px; background: var(--paper); box-shadow: 0 9px 30px rgba(20,42,40,.07); }
+		.panel h3 { margin: 0 0 6px; color: var(--forest); font-size: 30px; }
+		.panel > p { margin: 0 0 24px; color: var(--muted); font-size: 14px; }
+		.choices { display: flex; flex-wrap: wrap; gap: 9px; }
+		button { cursor: pointer; font: inherit; }
+		.choice { padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: transparent; font-size: 13px; transition: color .2s, background .2s; }
+		.choice:hover, .choice.active { color: var(--paper); background: var(--forest-soft); }
+		.choice-result { min-height: 48px; margin: 24px 0 0; color: var(--rust); font-family: 'Playfair Display', serif; font-size: 21px; line-height: 1.2; }
+		.field-note { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 92px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+		.field-note p { margin: 0; font-size: 15px; }
+		.next-note { flex: 0 0 auto; padding: 11px 16px; border: 0; border-radius: 7px; color: var(--forest); background: var(--lichen); font-size: 12px; font-weight: 700; }
+		.next-note:hover { background: #91ac84; }
+
+		footer { display: flex; justify-content: space-between; padding: 25px 0 35px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+		footer strong { color: var(--ink); }
+
+		@media (max-width: 760px) {
+			.page { width: min(100% - 28px, 620px); }
+			header { padding: 18px 0; }
+			.edition { display: none; }
+			.hero { display: flex; flex-direction: column-reverse; min-height: 0; border-radius: 19px; }
+			.hero-photo { height: 310px; min-height: 0; }
+			.hero-copy { padding: 43px 29px 48px; }
+			h1 { font-size: clamp(55px, 16vw, 80px); }
+			.intro, .explorer { grid-template-columns: 1fr; gap: 25px; }
+			.intro { padding: 58px 0 55px; }
+			.intro-copy { font-size: 16px; }
+			.facts { grid-template-columns: 1fr; margin-bottom: 55px; }
+			.fact { min-height: 0; }
+			.section-heading { display: block; }
+			.section-heading p { margin-top: 8px; }
+			.panel { padding: 26px 22px; }
+			.field-note { align-items: start; flex-direction: column; }
+			footer { display: block; }
+			footer span { display: block; margin-top: 8px; }
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<header>
+			<div class="brand"><span class="brand-mark">✦</span><span>ARCHIVES DU VIVANT</span></div>
+			<p class="edition">Dossier n°11 · Le loup</p>
+		</header>
+
+		<main>
+			<section class="hero" aria-labelledby="page-title">
+				<div class="hero-copy">
+					<p class="eyebrow">Canis lupus</p>
+					<h1>Le loup, la voix qui traverse les arbres.</h1>
+					<p>Il avance dans la neige, écoute avant d'agir et connaît le chemin de ceux qui marchent avec lui. Le loup est un animal social, attentif et bien plus discret que les légendes le racontent.</p>
+					<div class="hero-line">Libre, mais jamais seul</div>
+				</div>
+				<div class="hero-photo">
+					  <img src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=1100&q=85" alt="Loup observant la forêt">
+					<div class="photo-label">Un regard dans la brume</div>
+				</div>
+			</section>
+
+			<section class="intro" aria-labelledby="intro-title">
+				<h2>La force du lien.</h2>
+				<div class="intro-copy">
+					<p>Une meute n'est pas une foule : c'est une famille. Les loups coordonnent leurs déplacements, partagent les soins aux louveteaux et savent reconnaître la place de chacun dans le groupe.</p>
+					<p>Leur intelligence se lit dans les détails : un détour pour éviter le danger, un appel qui répond à un autre, une pause pour attendre le plus jeune. Dans la forêt, survivre est souvent une affaire de coopération.</p>
+					<p class="quote">« Le loup ne marche pas seulement dans la forêt. Il en écoute le rythme. »</p>
+				</div>
+			</section>
+
+			<section aria-labelledby="facts-title">
+				<div class="section-heading">
+					<h2 id="facts-title">Le canidé en bref</h2>
+					<p>Quelques repères pour mieux le suivre.</p>
+				</div>
+				<div class="facts">
+					<article class="fact"><span class="fact-number">40 km</span><h3>en une seule journée</h3><p>Selon la saison et le territoire, un loup peut parcourir de longues distances à la recherche de nourriture.</p></article>
+					<article class="fact"><span class="fact-number">10 ans</span><h3>dans la nature</h3><p>Son espérance de vie dépend du territoire, des ressources disponibles et de la sécurité de la meute.</p></article>
+					<article class="fact"><span class="fact-number">9 km</span><h3>pour un hurlement</h3><p>Son appel peut voyager très loin et servir à réunir le groupe ou à signaler un territoire.</p></article>
+				</div>
+			</section>
+
+			<section class="explorer" aria-label="Explorer le comportement du loup">
+				<div class="panel">
+					<h3>Décoder la meute</h3>
+					<p>Choisissez un signal pour comprendre ce qui se joue.</p>
+					<div class="choices">
+						<button class="choice active" data-message="Un hurlement peut maintenir le contact avec la meute, même lorsque les arbres cachent les silhouettes.">Hurlement</button>
+						<button class="choice" data-message="Une queue basse peut exprimer l'apaisement, la prudence ou la volonté d'éviter un conflit.">Queue basse</button>
+						<button class="choice" data-message="Le frottement du museau renforce les liens et transmet des informations par l'odeur.">Museau contre museau</button>
+					</div>
+					<p class="choice-result" aria-live="polite">Un hurlement peut maintenir le contact avec la meute, même lorsque les arbres cachent les silhouettes.</p>
+				</div>
+				<div class="panel">
+					<h3>Note de terrain</h3>
+					<p>Un détail à garder en tête lors de votre prochaine promenade.</p>
+					<div class="field-note"><p id="field-note">Les loups possèdent des pattes adaptées aux longues marches sur la neige.</p><button class="next-note" id="next-note">Nouvelle note</button></div>
+				</div>
+			</section>
+		</main>
+
+		<footer><strong>LOUP / PORTRAIT D'ESPÈCE</strong><span>Écouter · respecter · préserver</span></footer>
+	</div>
+
+	<script>
+		const choices = document.querySelectorAll('.choice');
+		const choiceResult = document.querySelector('.choice-result');
+
+		choices.forEach((choice) => {
+			choice.addEventListener('click', () => {
+				choices.forEach((item) => item.classList.remove('active'));
+				choice.classList.add('active');
+				choiceResult.textContent = choice.dataset.message;
+			});
+		});
+
+		const notes = [
+			'Les loups possèdent des pattes adaptées aux longues marches sur la neige.',
+			'Le loup peut entendre des sons sur plusieurs kilomètres lorsque l environnement est calme.',
+			'Les louveteaux sont nourris et surveillés par plusieurs membres de la meute.',
+			'Les oreilles et la position du corps donnent de nombreux indices sur l humeur d un loup.',
+			'Le pelage du loup varie selon son habitat, de la toundra blanche aux forêts tempérées.'
+		];
+		const fieldNote = document.querySelector('#field-note');
+		const nextNote = document.querySelector('#next-note');
+		let noteIndex = 0;
+
+		nextNote.addEventListener('click', () => {
+			noteIndex = (noteIndex + 1) % notes.length;
+			fieldNote.textContent = notes[noteIndex];
+		});
+	</script>
+</body>
+</html>
