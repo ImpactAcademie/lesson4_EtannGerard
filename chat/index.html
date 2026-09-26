@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Un petit observatoire sensible consacré aux chats.">
+	<title>Chat — Observatoire félin</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+		:root {
+			--night: #171b2d;
+			--night-soft: #252b45;
+			--cream: #f7f1e8;
+			--paper: #fffdf9;
+			--gold: #e4ad59;
+			--pink: #d98388;
+			--ink: #24283a;
+			--muted: #6f7180;
+			--line: rgba(36, 40, 58, .14);
+			--shadow: 0 22px 60px rgba(27, 28, 46, .14);
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: radial-gradient(circle at 85% 10%, rgba(228, 173, 89, .2), transparent 22rem), linear-gradient(135deg, var(--cream), #f2ede7 48%, #eee9f0);
+			font-family: 'DM Sans', sans-serif;
+			line-height: 1.5;
+		}
+
+		.page { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+
+		header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; }
+		.brand { display: flex; align-items: center; gap: 13px; color: var(--night); font-size: 13px; font-weight: 700; letter-spacing: .13em; }
+		.brand-icon { display: grid; width: 39px; height: 39px; place-items: center; border-radius: 12px; color: var(--night); background: var(--gold); font-size: 21px; transform: rotate(-5deg); }
+		.edition { margin: 0; color: var(--muted); font-size: 12px; }
+
+		.hero { display: grid; grid-template-columns: .92fr 1.08fr; min-height: 610px; overflow: hidden; border-radius: 28px; background: var(--night); box-shadow: var(--shadow); }
+		.hero-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(38px, 6vw, 84px); color: var(--cream); }
+		.kicker { margin: 0; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+		h1, h2, h3 { font-family: 'Playfair Display', serif; }
+		h1 { max-width: 470px; margin: 20px 0 25px; font-size: clamp(54px, 7vw, 91px); line-height: .94; letter-spacing: -.06em; }
+		.hero-copy > p:not(.kicker) { max-width: 390px; margin: 0; color: #d6d8e3; font-size: 17px; }
+		.hero-signature { display: flex; align-items: center; gap: 12px; margin-top: 40px; color: #afb1c4; font-size: 12px; }
+		.hero-signature::before { width: 30px; height: 1px; content: ''; background: var(--pink); }
+		.hero-photo { position: relative; min-height: 380px; background: #454660; }
+		.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+		.hero-photo::after { position: absolute; inset: 0; content: ''; background: linear-gradient(90deg, rgba(23,27,45,.3), transparent 42%), linear-gradient(0deg, rgba(23,27,45,.35), transparent 35%); }
+		.photo-label { position: absolute; z-index: 1; right: 25px; bottom: 20px; color: #fff; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+		.introduction { display: grid; grid-template-columns: .83fr 1.17fr; gap: 80px; align-items: start; padding: 88px 0 75px; }
+		h2 { margin: 0; color: var(--night); font-size: clamp(38px, 5vw, 61px); line-height: .98; letter-spacing: -.045em; }
+		.introduction-copy { max-width: 600px; color: var(--muted); font-size: 18px; }
+		.introduction-copy p { margin: 0 0 20px; }
+		.quote { margin: 29px 0 0; padding: 19px 0 0 21px; border-left: 3px solid var(--pink); color: var(--ink); font-family: 'Playfair Display', serif; font-size: 25px; line-height: 1.2; }
+
+		.section-top { display: flex; align-items: end; justify-content: space-between; margin-bottom: 22px; }
+		.section-top h2 { font-size: 39px; }
+		.section-top p { margin: 0; color: var(--muted); font-size: 13px; }
+		.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 76px; }
+		.fact { min-height: 195px; padding: 28px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,253,249,.7); transition: transform .22s ease, box-shadow .22s ease; }
+		.fact:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(36, 40, 58, .1); }
+		.fact-value { color: var(--pink); font-family: 'Playfair Display', serif; font-size: 36px; }
+		.fact h3 { margin: 18px 0 7px; font-family: 'DM Sans', sans-serif; font-size: 16px; }
+		.fact p { margin: 0; color: var(--muted); font-size: 14px; }
+
+		.explorer { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 75px; }
+		.panel { padding: 34px; border-radius: 18px; background: var(--paper); box-shadow: 0 9px 30px rgba(36, 40, 58, .07); }
+		.panel h3 { margin: 0 0 6px; color: var(--night); font-size: 30px; }
+		.panel > p { margin: 0 0 24px; color: var(--muted); font-size: 14px; }
+		.signals { display: flex; flex-wrap: wrap; gap: 9px; }
+		button { cursor: pointer; font: inherit; }
+		.signal { padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: transparent; font-size: 13px; transition: color .2s, background .2s; }
+		.signal:hover, .signal.active { color: #fff; background: var(--night-soft); }
+		.signal-result { min-height: 48px; margin: 24px 0 0; color: var(--pink); font-family: 'Playfair Display', serif; font-size: 21px; line-height: 1.2; }
+		.fact-box { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 92px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+		.fact-box p { margin: 0; font-size: 15px; }
+		.new-fact { flex: 0 0 auto; padding: 11px 16px; border: 0; border-radius: 7px; color: var(--night); background: var(--gold); font-size: 12px; font-weight: 700; }
+		.new-fact:hover { background: #d1973d; }
+
+		footer { display: flex; justify-content: space-between; padding: 25px 0 35px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+		footer strong { color: var(--ink); }
+
+		@media (max-width: 760px) {
+			.page { width: min(100% - 28px, 620px); }
+			header { padding: 18px 0; }
+			.edition { display: none; }
+			.hero { display: flex; flex-direction: column-reverse; min-height: 0; border-radius: 19px; }
+			.hero-photo { height: 310px; min-height: 0; }
+			.hero-copy { padding: 43px 29px 48px; }
+			h1 { font-size: clamp(54px, 16vw, 80px); }
+			.introduction, .explorer { grid-template-columns: 1fr; gap: 25px; }
+			.introduction { padding: 58px 0 55px; }
+			.introduction-copy { font-size: 16px; }
+			.facts { grid-template-columns: 1fr; margin-bottom: 55px; }
+			.fact { min-height: 0; }
+			.section-top { display: block; }
+			.section-top p { margin-top: 8px; }
+			.panel { padding: 26px 22px; }
+			.fact-box { align-items: start; flex-direction: column; }
+			footer { display: block; }
+			footer span { display: block; margin-top: 8px; }
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<header>
+			<div class="brand"><span class="brand-icon">✦</span><span>OBSERVATOIRE FÉLIN</span></div>
+			<p class="edition">Dossier n°07 · Le chat domestique</p>
+		</header>
+
+		<main>
+			<section class="hero" aria-labelledby="page-title">
+				<div class="hero-copy">
+					<p class="kicker">Felis catus</p>
+					<h1 id="page-title">Le chat, une énigme en pleine lumière.</h1>
+					<p>Il traverse la maison comme un secret, choisit ses silences et offre parfois un ronronnement. Le chat ne demande pas à être apprivoisé : il invite à être observé.</p>
+					<div class="hero-signature">Curieux par nature, libre par instinct</div>
+				</div>
+				<div class="hero-photo">
+					<img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1100&q=85" alt="Chat observant la scène depuis un fauteuil">
+					<div class="photo-label">Étude d'un regard</div>
+				</div>
+			</section>
+
+			<section class="introduction" aria-labelledby="intro-title">
+				<h2 id="intro-title">La grâce du quotidien.</h2>
+				<div class="introduction-copy">
+					<p>Le chat a gardé de ses ancêtres une attention aiguë au monde. Une lumière sur le mur, une branche qui bouge ou un bruit derrière une porte peuvent devenir l'événement de la journée.</p>
+					<p>Vivre avec lui, c'est accepter une relation faite de choix réciproques. Il vient quand il le souhaite, s'installe à côté plutôt que sur les genoux, puis réclame soudain toute notre attention.</p>
+					<p class="quote">« Le chat ne remplit pas l'espace. Il lui donne une autre dimension. »</p>
+				</div>
+			</section>
+
+			<section aria-labelledby="facts-title">
+				<div class="section-top">
+					<h2 id="facts-title">L'espèce en bref</h2>
+					<p>Quelques repères pour mieux le comprendre.</p>
+				</div>
+				<div class="facts">
+					<article class="fact"><span class="fact-value">20–30</span><h3>vibrisses sur le visage</h3><p>Ces moustaches sensibles l'aident à mesurer les passages et à percevoir les mouvements d'air.</p></article>
+					<article class="fact"><span class="fact-value">16 h</span><h3>de sommeil par jour</h3><p>Le repos lui permet de conserver l'énergie nécessaire à ses moments de chasse et de jeu.</p></article>
+					<article class="fact"><span class="fact-value">32</span><h3>muscles dans chaque oreille</h3><p>Ses oreilles pivotent pour localiser avec précision les sons qui attirent son attention.</p></article>
+				</div>
+			</section>
+
+			<section class="explorer" aria-label="Explorer le comportement du chat">
+				<div class="panel">
+					<h3>Que dit son attitude ?</h3>
+					<p>Sélectionnez un signal pour lire entre les lignes.</p>
+					<div class="signals">
+						<button class="signal active" data-message="Un ronronnement accompagne souvent le bien-être, mais peut aussi aider à se rassurer.">Ronronnement</button>
+						<button class="signal" data-message="Une queue dressée est généralement un signe de confiance et de salut amical.">Queue verticale</button>
+						<button class="signal" data-message="Cligner doucement des yeux est une façon féline de dire : je me sens bien ici.">Yeux mi-clos</button>
+					</div>
+					<p class="signal-result" aria-live="polite">Un ronronnement accompagne souvent le bien-être, mais peut aussi aider à se rassurer.</p>
+				</div>
+				<div class="panel">
+					<h3>Note de terrain</h3>
+					<p>Un détail à garder en tête lors de votre prochaine observation.</p>
+					<div class="fact-box"><p id="field-note">Les chats reconnaissent la voix de leur humain, même s'ils choisissent parfois de ne pas répondre.</p><button class="new-fact" id="new-note">Nouvelle note</button></div>
+				</div>
+			</section>
+		</main>
+
+		<footer><strong>CHAT / PORTRAIT D'ESPÈCE</strong><span>Regarder · respecter · laisser venir</span></footer>
+	</div>
+
+	<script>
+		const signals = document.querySelectorAll('.signal');
+		const signalResult = document.querySelector('.signal-result');
+
+		signals.forEach((signal) => {
+			signal.addEventListener('click', () => {
+				signals.forEach((item) => item.classList.remove('active'));
+				signal.classList.add('active');
+				signalResult.textContent = signal.dataset.message;
+			});
+		});
+
+		const notes = [
+			"Les chats reconnaissent la voix de leur humain, même s'ils choisissent parfois de ne pas répondre.",
+			"Un chat utilise son odorat pour cartographier les lieux familiers.",
+			"Le jeu permet au chat adulte de continuer à exercer ses réflexes de chasseur.",
+			"La position des oreilles peut révéler l'humeur d'un chat avant même ses miaulements.",
+			"Chaque chat possède une façon personnelle de communiquer avec les humains qui l'entourent."
+		];
+		const fieldNote = document.querySelector('#field-note');
+		const newNote = document.querySelector('#new-note');
+		let noteIndex = 0;
+
+		newNote.addEventListener('click', () => {
+			noteIndex = (noteIndex + 1) % notes.length;
+			fieldNote.textContent = notes[noteIndex];
+		});
+	</script>
+</body>
+</html>
