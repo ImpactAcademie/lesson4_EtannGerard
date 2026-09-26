@@ -82,6 +82,17 @@
 
 		footer { display: flex; justify-content: space-between; padding: 25px 0 35px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 		footer strong { color: var(--ink); }
+		.site-page { display: none; }
+		.site-page.active { display: block; }
+		.page-switcher { display: flex; gap: 8px; margin: 0 0 24px; }
+		.page-switcher button { min-width: 38px; padding: 9px 13px; border: 1px solid var(--line); border-radius: 7px; color: var(--ink); background: transparent; font-size: 12px; }
+		.page-switcher button.active, .page-switcher button:hover { color: #fff; background: var(--charcoal); }
+		.extra-page { min-height: 560px; padding: clamp(32px, 7vw, 80px); border-radius: 24px; color: var(--cream); background: var(--charcoal); }
+		.extra-page h1 { max-width: 700px; margin: 18px 0; font-size: clamp(48px, 7vw, 84px); }
+		.extra-page > p { max-width: 620px; color: #d9d4c7; font-size: 17px; }
+		.extra-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 36px; }
+		.extra-list article { padding: 22px; border-radius: 12px; color: var(--ink); background: var(--paper); }
+		.extra-list article p { color: var(--muted); font-size: 14px; }
 
 		@media (max-width: 760px) {
 			.page { width: min(100% - 28px, 620px); }
@@ -113,6 +124,8 @@
 		</header>
 
 		<main>
+			<div class="page-switcher" aria-label="Pages du dossier"><button class="active" data-page="1">01</button><button data-page="2">02</button><button data-page="3">03</button><button data-page="4">04</button></div>
+			<section class="site-page active" data-view="1">
 			<section class="hero" aria-labelledby="page-title">
 				<div class="hero-copy">
 					<p class="eyebrow">Panthera leo</p>
@@ -164,12 +177,24 @@
 					<div class="field-note"><p id="field-note">La crinière du lion peut refléter son âge, sa santé et son statut auprès des autres.</p><button class="next-note" id="next-note">Nouvelle note</button></div>
 				</div>
 			</section>
+			</section>
+			<section class="site-page" data-view="2"><div class="extra-page"><p class="eyebrow">Page 02 · La fierté</p><h1>Une famille, plusieurs rôles.</h1><p>Une fierté repose sur la complémentarité. Chaque lion apprend à reconnaître les forces des autres.</p><div class="extra-list"><article><h3>Les gardiennes</h3><p>Les lionnes coordonnent les déplacements.</p></article><article><h3>Les sentinelles</h3><p>Les adultes surveillent les limites du territoire.</p></article><article><h3>Les apprentis</h3><p>Les lionceaux transforment chaque jeu en entraînement.</p></article></div></div></section>
+			<section class="site-page" data-view="3"><div class="extra-page"><p class="eyebrow">Page 03 · Le territoire</p><h1>Un territoire est une promesse.</h1><p>Le territoire rassemble nourriture, repos et sécurité. Le rugissement en dessine les frontières invisibles.</p><div class="extra-list"><article><h3>Marquer</h3><p>Les odeurs signalent une présence aux autres lions.</p></article><article><h3>Patrouiller</h3><p>Le groupe reste attentif aux changements.</p></article><article><h3>Partager</h3><p>Un territoire sain offre l'espace nécessaire.</p></article></div></div></section>
+			<section class="site-page" data-view="4"><div class="extra-page"><p class="eyebrow">Page 04 · Le soir</p><h1>Quand la chaleur tombe.</h1><p>À la tombée du jour, la savane change de rythme et les lions commencent à lire les mouvements de la nuit.</p><div class="extra-list"><article><h3>Se reposer</h3><p>La journée permet de conserver son énergie.</p></article><article><h3>Se rapprocher</h3><p>La fraîcheur rassemble la fierté.</p></article><article><h3>Écouter</h3><p>Les sons nocturnes révèlent les mouvements.</p></article></div></div></section>
 		</main>
 
 		<footer><strong>LION / PORTRAIT D'ESPÈCE</strong><span>Observer · comprendre · préserver</span></footer>
 	</div>
 
 	<script>
+		document.querySelectorAll('.page-switcher button').forEach((button) => {
+			button.addEventListener('click', () => {
+				document.querySelectorAll('.page-switcher button').forEach((item) => item.classList.remove('active'));
+				document.querySelectorAll('.site-page').forEach((page) => page.classList.remove('active'));
+				button.classList.add('active');
+				document.querySelector('[data-view="' + button.dataset.page + '"]').classList.add('active');
+			});
+		});
 		const choices = document.querySelectorAll('.choice');
 		const choiceResult = document.querySelector('.choice-result');
 
