@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Un portrait du lion, sentinelle et grand félin de la savane.">
+	<title>Lion — Le souffle de la savane</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+		:root {
+			--charcoal: #202020;
+			--charcoal-soft: #38362f;
+			--sun: #e4a43e;
+			--clay: #c66b4d;
+			--cream: #f7efdf;
+			--paper: #fffaf0;
+			--ink: #292724;
+			--muted: #747067;
+			--line: rgba(41, 39, 36, .15);
+			--shadow: 0 24px 60px rgba(58, 42, 26, .18);
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: radial-gradient(circle at 90% 6%, rgba(228, 164, 62, .27), transparent 23rem), linear-gradient(130deg, var(--cream), #f8f5eb 52%, #ece7db);
+			font-family: 'DM Sans', sans-serif;
+			line-height: 1.5;
+		}
+
+		.page { width: min(1170px, calc(100% - 48px)); margin: 0 auto; }
+		header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; }
+		.brand { display: flex; align-items: center; gap: 12px; color: var(--charcoal); font-size: 13px; font-weight: 700; letter-spacing: .14em; }
+		.brand-mark { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 50%; color: var(--charcoal); background: var(--sun); font-size: 21px; }
+		.edition { margin: 0; color: var(--muted); font-size: 12px; }
+
+		.hero { display: grid; grid-template-columns: .98fr 1.02fr; min-height: 600px; overflow: hidden; border-radius: 27px; background: var(--charcoal); box-shadow: var(--shadow); }
+		.hero-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(38px, 7vw, 88px); color: var(--cream); }
+		.eyebrow { margin: 0; color: #efbc5c; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+		h1, h2, h3 { font-family: 'Playfair Display', serif; }
+		h1 { max-width: 500px; margin: 20px 0 25px; font-size: clamp(58px, 7.3vw, 96px); line-height: .92; letter-spacing: -.06em; }
+		.hero-copy > p:not(.eyebrow) { max-width: 410px; margin: 0; color: #d9d4c7; font-size: 17px; }
+		.hero-line { display: flex; align-items: center; gap: 12px; margin-top: 40px; color: #ada99f; font-size: 12px; }
+		.hero-line::before { width: 31px; height: 1px; content: ''; background: var(--clay); }
+		.hero-photo { position: relative; min-height: 380px; background: #8d765b; }
+		.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+		.hero-photo::after { position: absolute; inset: 0; content: ''; background: linear-gradient(90deg, rgba(32,32,32,.32), transparent 46%), linear-gradient(0deg, rgba(26,24,19,.4), transparent 38%); }
+		.photo-label { position: absolute; z-index: 1; right: 24px; bottom: 20px; color: #fff; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+		.intro { display: grid; grid-template-columns: .82fr 1.18fr; gap: 80px; align-items: start; padding: 88px 0 76px; }
+		h2 { margin: 0; color: var(--charcoal); font-size: clamp(40px, 5vw, 63px); line-height: .97; letter-spacing: -.045em; }
+		.intro-copy { max-width: 610px; color: var(--muted); font-size: 18px; }
+		.intro-copy p { margin: 0 0 20px; }
+		.quote { margin: 29px 0 0; padding: 19px 0 0 22px; border-left: 3px solid var(--clay); color: var(--ink); font-family: 'Playfair Display', serif; font-size: 25px; line-height: 1.2; }
+
+		.section-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 22px; }
+		.section-heading h2 { font-size: 39px; }
+		.section-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+		.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 76px; }
+		.fact { min-height: 195px; padding: 28px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,250,240,.72); transition: transform .22s ease, box-shadow .22s ease; }
+		.fact:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(58,42,26,.11); }
+		.fact-number { color: var(--clay); font-family: 'Playfair Display', serif; font-size: 36px; }
+		.fact h3 { margin: 17px 0 7px; font-family: 'DM Sans', sans-serif; font-size: 16px; }
+		.fact p { margin: 0; color: var(--muted); font-size: 14px; }
+
+		.explorer { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 76px; }
+		.panel { padding: 34px; border-radius: 18px; background: var(--paper); box-shadow: 0 9px 30px rgba(58,42,26,.07); }
+		.panel h3 { margin: 0 0 6px; color: var(--charcoal); font-size: 30px; }
+		.panel > p { margin: 0 0 24px; color: var(--muted); font-size: 14px; }
+		.choices { display: flex; flex-wrap: wrap; gap: 9px; }
+		button { cursor: pointer; font: inherit; }
+		.choice { padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: transparent; font-size: 13px; transition: color .2s, background .2s; }
+		.choice:hover, .choice.active { color: var(--paper); background: var(--charcoal-soft); }
+		.choice-result { min-height: 48px; margin: 24px 0 0; color: var(--clay); font-family: 'Playfair Display', serif; font-size: 21px; line-height: 1.2; }
+		.field-note { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 92px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+		.field-note p { margin: 0; font-size: 15px; }
+		.next-note { flex: 0 0 auto; padding: 11px 16px; border: 0; border-radius: 7px; color: var(--charcoal); background: var(--sun); font-size: 12px; font-weight: 700; }
+		.next-note:hover { background: #ce8b25; }
+
+		footer { display: flex; justify-content: space-between; padding: 25px 0 35px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+		footer strong { color: var(--ink); }
+
+		@media (max-width: 760px) {
+			.page { width: min(100% - 28px, 620px); }
+			header { padding: 18px 0; }
+			.edition { display: none; }
+			.hero { display: flex; flex-direction: column-reverse; min-height: 0; border-radius: 19px; }
+			.hero-photo { height: 310px; min-height: 0; }
+			.hero-copy { padding: 43px 29px 48px; }
+			h1 { font-size: clamp(55px, 16vw, 80px); }
+			.intro, .explorer { grid-template-columns: 1fr; gap: 25px; }
+			.intro { padding: 58px 0 55px; }
+			.intro-copy { font-size: 16px; }
+			.facts { grid-template-columns: 1fr; margin-bottom: 55px; }
+			.fact { min-height: 0; }
+			.section-heading { display: block; }
+			.section-heading p { margin-top: 8px; }
+			.panel { padding: 26px 22px; }
+			.field-note { align-items: start; flex-direction: column; }
+			footer { display: block; }
+			footer span { display: block; margin-top: 8px; }
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<header>
+			<div class="brand"><span class="brand-mark">✦</span><span>ARCHIVES DU VIVANT</span></div>
+			<p class="edition">Dossier n°09 · Le lion</p>
+		</header>
+
+		<main>
+			<section class="hero" aria-labelledby="page-title">
+				<div class="hero-copy">
+					<p class="eyebrow">Panthera leo</p>
+					<h1 id="page-title">Le lion, le silence avant le rugissement.</h1>
+					<p>Dans la lumière chaude de la savane, il avance entre puissance et patience. Le lion est un grand félin social, porté par les alliances, la vigilance et la force du groupe.</p>
+					<div class="hero-line">Une présence qui rassemble</div>
+				</div>
+				<div class="hero-photo">
+					<img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1100&q=85" alt="Lion observant la savane">
+					<div class="photo-label">Regard d'un souverain</div>
+				</div>
+			</section>
+
+			<section class="intro" aria-labelledby="intro-title">
+				<h2>La vie en fierté.</h2>
+				<div class="intro-copy">
+					<p>Le lion est le seul grand félin qui choisit durablement la vie en groupe. Une fierté partage les soins, la défense du territoire et les longues heures d'attente avant la chasse.</p>
+					<p>Les lionnes forment souvent le cœur actif de la famille. Les petits grandissent entourés de plusieurs adultes, apprenant par le jeu les règles complexes de la savane.</p>
+					<p class="quote">« Le rugissement n'est pas seulement un appel : c'est une façon de dire, nous sommes ici. »</p>
+				</div>
+			</section>
+
+			<section aria-labelledby="facts-title">
+				<div class="section-heading">
+					<h2 id="facts-title">Le grand félin en bref</h2>
+					<p>Quelques repères pour comprendre sa vie.</p>
+				</div>
+				<div class="facts">
+					<article class="fact"><span class="fact-number">250 kg</span><h3>pour un mâle adulte</h3><p>Sa masse varie selon les régions, mais sa musculature reste adaptée aux longues périodes de repos et aux accélérations brèves.</p></article>
+					<article class="fact"><span class="fact-number">20 h</span><h3>de repos quotidien</h3><p>Économiser son énergie est essentiel pour un prédateur qui chasse surtout lorsque la chaleur retombe.</p></article>
+					<article class="fact"><span class="fact-number">8 km</span><h3>pour un rugissement</h3><p>Dans de bonnes conditions, son appel peut traverser plusieurs kilomètres et réunir les membres du groupe.</p></article>
+				</div>
+			</section>
+
+			<section class="explorer" aria-label="Explorer le comportement du lion">
+				<div class="panel">
+					<h3>Lire un mouvement</h3>
+					<p>Choisissez un signal pour découvrir ce qu'il peut raconter.</p>
+					<div class="choices">
+						<button class="choice active" data-message="Une queue qui bat doucement peut traduire la concentration, l'agacement ou l'impatience.">Queue en mouvement</button>
+						<button class="choice" data-message="Un lion qui frotte sa tête contre un autre entretient un lien social et laisse son odeur.">Tête contre tête</button>
+						<button class="choice" data-message="Les oreilles tournées vers l'avant signalent souvent une attention entière à ce qui se passe.">Oreilles dressées</button>
+					</div>
+					<p class="choice-result" aria-live="polite">Une queue qui bat doucement peut traduire la concentration, l'agacement ou l'impatience.</p>
+				</div>
+				<div class="panel">
+					<h3>Note de terrain</h3>
+					<p>Un fait à garder en tête lors de votre prochaine exploration.</p>
+					<div class="field-note"><p id="field-note">La crinière du lion peut refléter son âge, sa santé et son statut auprès des autres.</p><button class="next-note" id="next-note">Nouvelle note</button></div>
+				</div>
+			</section>
+		</main>
+
+		<footer><strong>LION / PORTRAIT D'ESPÈCE</strong><span>Observer · comprendre · préserver</span></footer>
+	</div>
+
+	<script>
+		const choices = document.querySelectorAll('.choice');
+		const choiceResult = document.querySelector('.choice-result');
+
+		choices.forEach((choice) => {
+			choice.addEventListener('click', () => {
+				choices.forEach((item) => item.classList.remove('active'));
+				choice.classList.add('active');
+				choiceResult.textContent = choice.dataset.message;
+			});
+		});
+
+		const notes = [
+			"La crinière du lion peut refléter son âge, sa santé et son statut auprès des autres.",
+			"Les lions communiquent aussi par des frottements, des odeurs et des expressions du visage.",
+			"Les lionceaux passent beaucoup de temps à jouer pour apprendre les gestes de la chasse.",
+			"Un lion peut reconnaître la voix d'un membre de sa fierté au milieu de nombreux sons.",
+			"Les moustaches du lion l'aident à percevoir les distances dans les espaces peu éclairés."
+		];
+		const fieldNote = document.querySelector('#field-note');
+		const nextNote = document.querySelector('#next-note');
+		let noteIndex = 0;
+
+		nextNote.addEventListener('click', () => {
+			noteIndex = (noteIndex + 1) % notes.length;
+			fieldNote.textContent = notes[noteIndex];
+		});
+	</script>
+</body>
+</html>
