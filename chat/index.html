@@ -38,16 +38,16 @@
 		.brand-icon { display: grid; width: 39px; height: 39px; place-items: center; border-radius: 12px; color: var(--night); background: var(--gold); font-size: 21px; transform: rotate(-5deg); }
 		.edition { margin: 0; color: var(--muted); font-size: 12px; }
 
-		.hero { display: grid; grid-template-columns: .92fr 1.08fr; min-height: 610px; overflow: hidden; border-radius: 28px; background: var(--night); box-shadow: var(--shadow); }
-		.hero-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(38px, 6vw, 84px); color: var(--cream); }
+		.hero { position: relative; display: block; width: 100vw; margin-left: calc(50% - 50vw); min-height: 610px; overflow: hidden; border-radius: 0; background: var(--night); box-shadow: var(--shadow); }
+		.hero-copy { position: relative; z-index: 1; display: flex; width: 58%; min-height: 610px; flex-direction: column; justify-content: center; padding: clamp(38px, 6vw, 84px); color: var(--cream); }
 		.kicker { margin: 0; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
 		h1, h2, h3 { font-family: 'Playfair Display', serif; }
 		h1 { max-width: 470px; margin: 20px 0 25px; font-size: clamp(54px, 7vw, 91px); line-height: .94; letter-spacing: -.06em; }
 		.hero-copy > p:not(.kicker) { max-width: 390px; margin: 0; color: #d6d8e3; font-size: 17px; }
 		.hero-signature { display: flex; align-items: center; gap: 12px; margin-top: 40px; color: #afb1c4; font-size: 12px; }
 		.hero-signature::before { width: 30px; height: 1px; content: ''; background: var(--pink); }
-		.hero-photo { position: relative; min-height: 380px; background: #454660; }
-		.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+		.hero-photo { position: absolute; inset: 0; min-height: 0; background: #454660; }
+		.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center center; }
 		.hero-photo::after { position: absolute; inset: 0; content: ''; background: linear-gradient(90deg, rgba(23,27,45,.3), transparent 42%), linear-gradient(0deg, rgba(23,27,45,.35), transparent 35%); }
 		.photo-label { position: absolute; z-index: 1; right: 25px; bottom: 20px; color: #fff; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
 
@@ -83,25 +83,14 @@
 
 		footer { display: flex; justify-content: space-between; padding: 25px 0 35px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 		footer strong { color: var(--ink); }
-		.site-page { display: none; }
-		.site-page.active { display: block; }
-		.page-switcher { display: flex; gap: 8px; margin: 0 0 24px; }
-		.page-switcher button { min-width: 38px; padding: 9px 13px; border: 1px solid var(--line); border-radius: 7px; color: var(--ink); background: transparent; font-size: 12px; }
-		.page-switcher button.active, .page-switcher button:hover { color: #fff; background: var(--night); }
-		.extra-page { min-height: 560px; padding: clamp(32px, 7vw, 80px); border-radius: 24px; color: #fff; background: var(--night); }
-		.extra-page h1 { max-width: 700px; margin: 18px 0; font-size: clamp(48px, 7vw, 84px); }
-		.extra-page > p { max-width: 620px; color: #d6d8e3; font-size: 17px; }
-		.extra-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 36px; }
-		.extra-list article { padding: 22px; border-radius: 12px; color: var(--ink); background: var(--paper); }
-		.extra-list article p { color: var(--muted); font-size: 14px; }
 
 		@media (max-width: 760px) {
 			.page { width: min(100% - 28px, 620px); }
 			header { padding: 18px 0; }
 			.edition { display: none; }
-			.hero { display: flex; flex-direction: column-reverse; min-height: 0; border-radius: 19px; }
-			.hero-photo { height: 310px; min-height: 0; }
-			.hero-copy { padding: 43px 29px 48px; }
+			.hero { display: block; min-height: 0; border-radius: 0; }
+			.hero-photo { position: absolute; inset: 0; height: auto; min-height: 0; }
+			.hero-copy { width: 100%; min-height: 560px; padding: 43px 29px 48px; }
 			h1 { font-size: clamp(54px, 16vw, 80px); }
 			.introduction, .explorer { grid-template-columns: 1fr; gap: 25px; }
 			.introduction { padding: 58px 0 55px; }
@@ -125,8 +114,6 @@
 		</header>
 
 		<main>
-			<div class="page-switcher" aria-label="Pages du dossier"><button class="active" data-page="1">01</button><button data-page="2">02</button></div>
-			<section class="site-page active" data-view="1">
 			<section class="hero" aria-labelledby="page-title">
 				<div class="hero-copy">
 					<p class="kicker">Felis catus</p>
@@ -178,22 +165,12 @@
 					<div class="fact-box"><p id="field-note">Les chats reconnaissent la voix de leur humain, même s'ils choisissent parfois de ne pas répondre.</p><button class="new-fact" id="new-note">Nouvelle note</button></div>
 				</div>
 			</section>
-		</section>
-		<section class="site-page" data-view="2"><div class="extra-page"><p class="kicker">Page 02 · Les sens</p><h1>Le monde commence par les moustaches.</h1><p>Le chat lit son environnement avec une précision étonnante. Son nez, ses oreilles et ses vibrisses composent une carte intime de chaque pièce.</p><div class="extra-list"><article><strong>48</strong><p>moustaches sensibles pour mesurer les passages et sentir les courants d'air.</p></article><article><strong>32</strong><p>muscles dans chaque oreille pour localiser les sons avec finesse.</p></article><article><strong>16 h</strong><p>de sommeil quotidien pour préserver son énergie et ses réflexes.</p></article></div></div></section>
 		</main>
 
 		<footer><strong>CHAT / PORTRAIT D'ESPÈCE</strong><span>Regarder · respecter · laisser venir</span></footer>
 	</div>
 
 	<script>
-		document.querySelectorAll('.page-switcher button').forEach((button) => {
-			button.addEventListener('click', () => {
-				document.querySelectorAll('.page-switcher button').forEach((item) => item.classList.remove('active'));
-				document.querySelectorAll('.site-page').forEach((page) => page.classList.remove('active'));
-				button.classList.add('active');
-				document.querySelector('[data-view="' + button.dataset.page + '"]').classList.add('active');
-			});
-		});
 		const signals = document.querySelectorAll('.signal');
 		const signalResult = document.querySelector('.signal-result');
 
